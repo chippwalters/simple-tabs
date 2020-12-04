@@ -17,7 +17,7 @@ bl_info = {
     'author': 'bonjorno7, TeamC',
     'description': 'Easily navigate the Blender sidebar',
     'blender': (2, 80, 0),
-    'version': (0, 0, 1),
+    'version': (0, 0, 2),
     'location': 'View3D',
     'wiki_url': '',
     'category': '3D View'
