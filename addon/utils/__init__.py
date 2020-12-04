@@ -1,4 +1,5 @@
 from . import addon
+from . import sidebar
 
 
 def register():
