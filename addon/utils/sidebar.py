@@ -11,9 +11,6 @@ def panels() -> set:
         if getattr(panel, 'bl_region_type', None) != 'UI':
             continue
 
-        if not hasattr(bpy.types, panel.__name__):
-            continue
-
         if hasattr(panel, 'poll'):
             try:
                 if not panel.poll(bpy.context):
@@ -37,3 +34,11 @@ def categories() -> set:
             categories.add('Misc')
 
     return categories
+
+
+def update(panel: bpy.types.Panel):
+    try:
+        bpy.utils.unregister_class(panel)
+        bpy.utils.register_class(panel)
+    except:
+        pass

@@ -26,16 +26,12 @@ class OpenTab(bpy.types.Operator):
             if hasattr(panel, 'original_category'):
                 panel.bl_category = panel.original_category
                 del panel.original_category
-
-                bpy.utils.unregister_class(panel)
-                bpy.utils.register_class(panel)
+                utils.sidebar.update(panel)
 
             elif panel.bl_category == self.category:
                 panel.original_category = panel.bl_category
                 panel.bl_category = 'SIMPLE TABS'
-
-                bpy.utils.unregister_class(panel)
-                bpy.utils.register_class(panel)
+                utils.sidebar.update(panel)
 
         self.report({'INFO'}, f'Opened {self.category}')
         return {'FINISHED'}
