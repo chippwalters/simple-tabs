@@ -28,8 +28,8 @@ class OpenTab(bpy.types.Operator):
                 del panel.original_category
                 utils.sidebar.update(panel)
 
-            elif panel.bl_category == self.category:
-                panel.original_category = panel.bl_category
+            elif utils.sidebar.category(panel) == self.category:
+                panel.original_category = getattr(panel, 'bl_category', None)
                 panel.bl_category = 'SIMPLE TABS'
                 utils.sidebar.update(panel)
 
