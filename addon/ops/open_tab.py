@@ -20,17 +20,14 @@ class OpenTab(bpy.types.Operator):
         if not context.space_data.show_region_ui:
             context.space_data.show_region_ui = True
 
-        # TODO: Set the sidebar width (if possible)
+        panels = utils.sidebar.panels()
 
-        for panel in utils.sidebar.panels():
-            if hasattr(panel, 'original_category'):
-                panel.bl_category = panel.original_category
-                del panel.original_category
+        for panel in panels:
+            if utils.sidebar.category(panel) == self.category:
                 utils.sidebar.update(panel)
 
-            elif utils.sidebar.category(panel) == self.category:
-                panel.original_category = getattr(panel, 'bl_category', None)
-                panel.bl_category = 'SIMPLE TABS'
+        for panel in panels:
+            if utils.sidebar.category(panel) != self.category:
                 utils.sidebar.update(panel)
 
         self.report({'INFO'}, f'Opened {self.category}')
