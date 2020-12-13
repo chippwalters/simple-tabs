@@ -14,7 +14,7 @@
 
 bl_info = {
     'name': 'SIMPLE TABS',
-    'author': 'bonjorno7, TeamC',
+    'author': 'bonjorno7, Chipp Walters, MasterXeon1001',
     'description': 'Easily navigate the Blender sidebar',
     'blender': (2, 80, 0),
     'version': (0, 0, 5),
