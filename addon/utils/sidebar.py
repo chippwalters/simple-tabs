@@ -49,12 +49,12 @@ def check(panel: bpy.types.Panel) -> bool:
     return True
 
 
-def panels() -> set:
-    panels = set()
+def panels() -> list:
+    panels = []
 
     for panel in bpy.types.Panel.__subclasses__():
         if check(panel):
-            panels.add(panel)
+            panels.append(panel)
 
     return panels
 
