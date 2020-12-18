@@ -1,7 +1,9 @@
 import bpy
+from . import refresh
 
 
 classes = (
+    refresh.Refresh,
 )
 
 
