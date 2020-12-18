@@ -1,9 +1,11 @@
 import bpy
 from . import refresh
+from . import move
 
 
 classes = (
     refresh.Refresh,
+    move.Move,
 )
 
 
