@@ -10,9 +10,9 @@ class AddonPrefs(bpy.types.AddonPreferences):
     popover_width: bpy.props.FloatProperty(
         name='Popover Width',
         description='Width of the 3D view popover in UI units',
-        default=8,
-        min=4,
-        max=16,
+        default=16,
+        min=8,
+        max=32,
         step=1,
         precision=2,
     )
