@@ -25,6 +25,9 @@ mode_table = {
 
 
 def check(panel: bpy.types.Panel) -> bool:
+    if getattr(panel, 'bl_category', None) == 'Item':
+        return False
+
     if getattr(panel, 'bl_space_type', None) != 'VIEW_3D':
         return False
 
