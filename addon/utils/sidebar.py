@@ -59,7 +59,7 @@ def panels() -> list:
     return panels
 
 
-def category(panel: bpy.types.Panel) -> str:
+def tab(panel: bpy.types.Panel) -> str:
     if getattr(panel, 'original_category', None):
         return panel.original_category
     elif getattr(panel, 'bl_category', None):
@@ -68,13 +68,13 @@ def category(panel: bpy.types.Panel) -> str:
         return 'Misc'
 
 
-def categories() -> set:
-    categories = set()
+def tabs() -> set:
+    tabs = set()
 
     for panel in panels():
-        categories.add(category(panel))
+        tabs.add(tab(panel))
 
-    return categories
+    return tabs
 
 
 def update(panel: bpy.types.Panel):
