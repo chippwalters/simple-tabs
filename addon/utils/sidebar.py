@@ -60,7 +60,9 @@ def panels() -> list:
 
 
 def category(panel: bpy.types.Panel) -> str:
-    if getattr(panel, 'bl_category', None):
+    if getattr(panel, 'original_category', None):
+        return panel.original_category
+    elif getattr(panel, 'bl_category', None):
         return panel.bl_category
     else:
         return 'Misc'
