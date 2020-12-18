@@ -1,11 +1,13 @@
 import bpy
-from . import addon
+from . import tab
 from . import prefs
+from . import addon
 
 
 classes = (
-    addon.AddonProps,
+    tab.TabProps,
     prefs.AddonPrefs,
+    addon.AddonProps,
 )
 
 
