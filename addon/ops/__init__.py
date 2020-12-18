@@ -1,9 +1,7 @@
 import bpy
-from . import open_tab
 
 
 classes = (
-    open_tab.OpenTab,
 )
 
 

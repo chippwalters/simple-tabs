@@ -20,9 +20,6 @@ class MainPanel(bpy.types.Panel):
         if self.is_popover:
             layout.ui_units_x = prefs.popover_width
 
-        for category in sorted(utils.sidebar.categories()):
-            op = column.operator('simpletabs.open_tab', text=category)
-            op.category = category
 
 
 def popover(self, context: bpy.types.Context):
