@@ -82,4 +82,4 @@ def update(panel: bpy.types.Panel):
         bpy.utils.unregister_class(panel)
         bpy.utils.register_class(panel)
     except:
-        pass
+        print(f'Failed to update {panel}')
