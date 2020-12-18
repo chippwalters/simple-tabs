@@ -1,8 +1,10 @@
 import bpy
+from . import tab_list
 from . import panel
 
 
 classes = (
+    tab_list.TabList,
     panel.MainPanel,
 )
 
