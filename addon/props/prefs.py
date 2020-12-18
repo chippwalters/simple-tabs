@@ -1,4 +1,5 @@
 import bpy
+from .. import props
 from .. import utils
 
 
@@ -15,6 +16,10 @@ class AddonPrefs(bpy.types.AddonPreferences):
         step=1,
         precision=2,
     )
+
+
+    tab_items: bpy.props.CollectionProperty(type=props.tab.TabProps)
+    tab_index: bpy.props.IntProperty(name='', description='Ignore the sentence above')
 
 
     def draw(self, context: bpy.types.Context):
