@@ -2,13 +2,13 @@ import bpy
 
 
 def check(panel: bpy.types.Panel) -> bool:
-    if getattr(panel, 'bl_category', None) == 'Item':
-        return False
-
     if getattr(panel, 'bl_space_type', None) != 'VIEW_3D':
         return False
 
     if getattr(panel, 'bl_region_type', None) != 'UI':
+        return False
+
+    if getattr(panel, 'bl_category', None) == 'Item':
         return False
 
     if hasattr(panel, 'poll'):
