@@ -1,4 +1,5 @@
 import bpy
+import inspect
 
 
 def check(panel: bpy.types.Panel) -> bool:
@@ -10,6 +11,9 @@ def check(panel: bpy.types.Panel) -> bool:
 
     if getattr(panel, 'bl_category', None) == 'Item':
         return False
+
+    if inspect.getmodule(panel).__name__.startswith('bl_ui'):
+        return True
 
     if hasattr(panel, 'poll'):
         try:
