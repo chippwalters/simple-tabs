@@ -23,8 +23,8 @@ class Update(bpy.types.Operator):
                 del panel.original_category
 
         for panel in panels:
-            panel.original_category = panel.bl_category
-            tab = prefs.tab_items[panel.bl_category]
+            panel.original_category = utils.sidebar.tab(panel)
+            tab = prefs.tab_items[panel.original_category]
             panel.bl_category = tab.rename
 
         panels_per_tab = {tab.name: [] for tab in prefs.tab_items}
