@@ -21,7 +21,8 @@ class MainPanel(bpy.types.Panel):
             layout.ui_units_x = prefs.popover_width
 
         row = column.row()
-        row.template_list("SIMPLETABS_UL_TabList", '', prefs, 'tab_items', prefs, 'tab_index', rows=len(prefs.tab_items))
+        rows = max(len(prefs.tab_items), 8)
+        row.template_list("SIMPLETABS_UL_TabList", '', prefs, 'tab_items', prefs, 'tab_index', rows=rows)
 
         col = row.column(align=True)
         col.scale_x = 1.25
