@@ -29,11 +29,10 @@ class MainPanel(bpy.types.Panel):
         col.scale_y = 1.5
 
         col.operator('simpletabs.refresh', text='', icon='FILE_REFRESH')
+        col.operator('simpletabs.update', text='', icon='CHECKMARK')
         col.separator()
         col.operator('simpletabs.move', text='', icon='TRIA_UP').direction = 'UP'
         col.operator('simpletabs.move', text='', icon='TRIA_DOWN').direction = 'DOWN'
-        col.separator()
-        col.operator('simpletabs.update', text='', icon='CHECKMARK')
         col.separator()
         col.operator('wm.url_open', text='', icon_value=icons.id('question')).url = 'http://cw1.me/simpletabs'
 
