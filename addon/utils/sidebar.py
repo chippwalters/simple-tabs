@@ -3,13 +3,19 @@ import inspect
 
 
 def check(panel: bpy.types.Panel) -> bool:
+    if getattr(panel, 'bl_parent_id', None):
+        parent = getattr(bpy.types, panel.bl_parent_id, None)
+
+        if parent and not check(parent):
+            return False
+
     if getattr(panel, 'bl_space_type', None) != 'VIEW_3D':
         return False
 
     if getattr(panel, 'bl_region_type', None) != 'UI':
         return False
 
-    if getattr(panel, 'bl_category', None) == 'Item':
+    if tab(panel) == 'Item':
         return False
 
     if inspect.getmodule(panel).__name__.startswith('bl_ui'):
@@ -36,12 +42,19 @@ def panels() -> list:
 
 
 def tab(panel: bpy.types.Panel) -> str:
+    if getattr(panel, 'bl_parent_id', None):
+        parent = getattr(bpy.types, panel.bl_parent_id, None)
+
+        if parent:
+            return tab(parent)
+
     if getattr(panel, 'original_category', None):
         return panel.original_category
-    elif getattr(panel, 'bl_category', None):
+
+    if getattr(panel, 'bl_category', None):
         return panel.bl_category
-    else:
-        return 'Misc'
+
+    return 'Misc'
 
 
 def tabs() -> set:
