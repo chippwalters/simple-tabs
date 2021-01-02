@@ -10,8 +10,9 @@ class Refresh(bpy.types.Operator):
 
 
     def execute(self, context: bpy.types.Context):
-        if not context.space_data.show_region_ui:
-            context.space_data.show_region_ui = True
+        if hasattr(context.space_data, 'show_region_ui'):
+            if not context.space_data.show_region_ui:
+                context.space_data.show_region_ui = True
 
         prefs = utils.addon.prefs()
         names = utils.sidebar.tabs()
