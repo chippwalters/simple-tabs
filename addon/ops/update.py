@@ -10,6 +10,9 @@ class Update(bpy.types.Operator):
 
 
     def execute(self, context: bpy.types.Context):
+        if not context.space_data.show_region_ui:
+            context.space_data.show_region_ui = True
+
         prefs = utils.addon.prefs()
         panels = utils.sidebar.panels()
 
