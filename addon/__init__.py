@@ -3,6 +3,7 @@ from . import props
 from . import icons
 from . import ops
 from . import ui
+from . import timers
 
 
 modules = (
@@ -11,19 +12,13 @@ modules = (
     icons,
     ops,
     ui,
+    timers,
 )
 
 
 def register():
     for module in modules:
         module.register()
-
-    import bpy
-
-    def timer():
-        bpy.ops.simpletabs.update()
-
-    bpy.app.timers.register(timer, first_interval=5)
 
 
 def unregister():
