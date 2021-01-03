@@ -17,7 +17,7 @@ bl_info = {
     'author': 'bonjorno7, Chipp Walters, MasterXeon1001',
     'description': 'Organize the Blender sidebar',
     'blender': (2, 80, 0),
-    'version': (1, 1, 2),
+    'version': (1, 1, 3),
     'location': 'View3D',
     'wiki_url': '',
     'category': '3D View'
