@@ -3,6 +3,7 @@ from . import props
 from . import icons
 from . import ops
 from . import ui
+from . import timers
 
 
 modules = (
@@ -11,6 +12,7 @@ modules = (
     icons,
     ops,
     ui,
+    timers,
 )
 
 

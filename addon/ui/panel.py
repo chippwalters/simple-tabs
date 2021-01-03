@@ -34,7 +34,7 @@ class MainPanel(bpy.types.Panel):
         col.operator('simpletabs.move', text='', icon='TRIA_UP').direction = 'UP'
         col.operator('simpletabs.move', text='', icon='TRIA_DOWN').direction = 'DOWN'
         col.separator()
-        col.operator('wm.url_open', text='', icon_value=icons.id('question')).url = 'http://cw1.me/simpletabs'
+        col.operator('wm.url_open', text='', icon_value=icons.id('question')).url = 'http://cw1.me/simpletabd'
 
 
 def popover(self, context: bpy.types.Context):

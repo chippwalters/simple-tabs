@@ -18,7 +18,9 @@ def check(panel: bpy.types.Panel) -> bool:
     if tab(panel) == 'Item':
         return False
 
-    if inspect.getmodule(panel).__name__.startswith('bl_ui'):
+    module = inspect.getmodule(panel).__name__.partition('.')[0].lower()
+
+    if module in {'bl_ui', 'bc', 'boxcutter'}:
         return True
 
     if hasattr(panel, 'poll'):
