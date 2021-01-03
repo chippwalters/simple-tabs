@@ -15,6 +15,6 @@ class TabProps(bpy.types.PropertyGroup):
 
     rename: bpy.props.StringProperty(
         name='Changed Name',
-        description='The new name of this tab in the sidebar (empty to hide tab)',
+        description='The new name of this tab in the sidebar (clear to reset to default)',
         update=update_rename,
     )
