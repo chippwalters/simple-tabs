@@ -18,6 +18,17 @@ class AddonPrefs(bpy.types.AddonPreferences):
     )
 
 
+    startup_delay: bpy.props.FloatProperty(
+        name='Startup Delay',
+        description='How many seconds to wait after blender startup before panels',
+        default=5,
+        min=1,
+        max=20,
+        step=1,
+        precision=2,
+    )
+
+
     tab_items: bpy.props.CollectionProperty(type=props.tab.TabProps)
     tab_index: bpy.props.IntProperty(name='', description='Ignore the sentence above')
 
@@ -29,3 +40,7 @@ class AddonPrefs(bpy.types.AddonPreferences):
         split = column.split(factor=0.5)
         split.label(text='Popover Width')
         split.prop(self, 'popover_width', text='')
+
+        split = column.split(factor=0.5)
+        split.label(text='Startup Delay')
+        split.prop(self, 'startup_delay', text='')
