@@ -3,6 +3,15 @@ from .. import props
 from .. import utils
 
 
+def update_exclude_tabs(self, context):
+    exclude = [tab.strip() for tab in self.exclude_tabs.split(',')]
+
+    if 'Item' not in exclude:
+        exclude.insert(0, 'Item')
+
+    self['exclude_tabs'] = ', '.join(tab for tab in exclude if tab)
+
+
 class AddonPrefs(bpy.types.AddonPreferences):
     bl_idname = utils.addon.module()
 
@@ -33,6 +42,7 @@ class AddonPrefs(bpy.types.AddonPreferences):
         name='Exclude Tabs',
         description='A comma separated list of tabs that SIMPLE TABS should ignore',
         default='Item, ',
+        update=update_exclude_tabs,
     )
 
 
