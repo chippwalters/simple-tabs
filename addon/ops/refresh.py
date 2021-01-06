@@ -17,6 +17,12 @@ class Refresh(bpy.types.Operator):
         prefs = utils.addon.prefs()
         names = utils.sidebar.tabs()
 
+        if utils.hops.get_module():
+            names.add(utils.hops.get_default())
+
+        if utils.bc.get_module():
+            names.add(utils.bc.get_default())
+
         for tab in prefs.tab_items[:]:
             if tab.name not in names:
                 index = prefs.tab_items.find(tab.name)
@@ -26,7 +32,15 @@ class Refresh(bpy.types.Operator):
             if name not in prefs.tab_items:
                 tab = prefs.tab_items.add()
                 tab.name = name
-                tab.rename = name
+
+                if name == utils.hops.get_default():
+                    tab.rename = utils.hops.get_tab()
+
+                elif name == utils.bc.get_default():
+                    tab.rename = utils.bc.get_tab()
+
+                else:
+                    tab.rename = name
 
         self.report({'INFO'}, f'Found {len(prefs.tab_items)} tabs')
         return {'FINISHED'}
