@@ -22,11 +22,8 @@ def tab(panel: bpy.types.Panel) -> str:
 
 def is_excluded(panel: bpy.types.Panel) -> bool:
     prefs = utils.addon.prefs()
-
-    category = tab(panel).replace(' ', '')
-    exclude = prefs.exclude_tabs.replace(' ', '')
-
-    return category in exclude.split(',')
+    exclude = [tab.strip() for tab in prefs.exclude_tabs.split(',')]
+    return tab(panel) in exclude
 
 
 def module(panel: bpy.types.Panel) -> str:
