@@ -38,8 +38,15 @@ class Update(bpy.types.Operator):
             panels_per_tab[tab].append(panel)
 
         for tab in prefs.tab_items:
-            for panel in panels_per_tab[tab.name]:
-                utils.sidebar.update(panel)
+            if tab.name == utils.hops.get_default():
+                utils.hops.set_tab(tab.rename)
+
+            elif tab.name == utils.bc.get_default():
+                utils.bc.set_tab(tab.rename)
+
+            else:
+                for panel in panels_per_tab[tab.name]:
+                    utils.sidebar.update(panel)
 
         self.report({'INFO'}, 'Updated sidebar tabs')
         return {'FINISHED'}
