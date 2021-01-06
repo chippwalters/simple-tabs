@@ -29,6 +29,19 @@ def is_excluded(panel: bpy.types.Panel) -> bool:
     return category in exclude.split(',')
 
 
+def module(panel: bpy.types.Panel) -> str:
+    return inspect.getmodule(panel).__name__.split('.')[0]
+
+
+def is_special(panel: bpy.types.Panel) -> bool:
+    special = {
+        utils.hops.get_module(),
+        utils.bc.get_module(),
+    }
+
+    return module(panel) in special
+
+
 def is_registered(panel: bpy.types.Panel) -> bool:
     if getattr(panel, 'bl_idname', None):
         name = panel.bl_idname
@@ -65,14 +78,15 @@ def check(panel: bpy.types.Panel) -> bool:
     if is_excluded(panel):
         return False
 
+    if is_special(panel):
+        return False
+
     if not is_registered(panel):
         return False
 
-    if inspect.getmodule(panel).__name__.startswith('bl_ui'):
-        return True
-
-    if not poll(panel):
-        return False
+    if module(panel) != 'bl_ui':
+        if not poll(panel):
+            return False
 
     return True
 
