@@ -1,46 +1,7 @@
 import bpy
 import inspect
-
-
-def check(panel: bpy.types.Panel) -> bool:
-    if getattr(panel, 'bl_parent_id', None):
-        parent = getattr(bpy.types, panel.bl_parent_id, None)
-
-        if parent and not check(parent):
-            return False
-
-    if getattr(panel, 'bl_space_type', None) != 'VIEW_3D':
-        return False
-
-    if getattr(panel, 'bl_region_type', None) != 'UI':
-        return False
-
-    if tab(panel) == 'Item':
-        return False
-
-    module = inspect.getmodule(panel).__name__.partition('.')[0].lower()
-
-    if module in {'bl_ui', 'bc', 'boxcutter'}:
-        return True
-
-    if hasattr(panel, 'poll'):
-        try:
-            if not panel.poll(bpy.context):
-                return False
-        except:
-            return False
-
-    return True
-
-
-def panels() -> list:
-    panels = []
-
-    for panel in bpy.types.Panel.__subclasses__():
-        if check(panel):
-            panels.append(panel)
-
-    return panels
+import traceback
+from .. import utils
 
 
 def tab(panel: bpy.types.Panel) -> str:
@@ -59,6 +20,79 @@ def tab(panel: bpy.types.Panel) -> str:
     return 'Misc'
 
 
+def is_excluded(panel: bpy.types.Panel) -> bool:
+    prefs = utils.addon.prefs()
+
+    category = tab(panel).replace(' ', '')
+    exclude = prefs.exclude_tabs.replace(' ', '')
+
+    return category in exclude.split(',')
+
+
+def is_registered(panel: bpy.types.Panel) -> bool:
+    if getattr(panel, 'bl_idname', None):
+        name = panel.bl_idname
+    else:
+        name = panel.__name__
+
+    return hasattr(bpy.types, name)
+
+
+def poll(panel: bpy.types.Panel) -> bool:
+    if hasattr(panel, 'poll'):
+        try:
+            if not panel.poll(bpy.context):
+                return False
+        except:
+            return False
+
+    return True
+
+
+def check(panel: bpy.types.Panel) -> bool:
+    if getattr(panel, 'bl_parent_id', None):
+        parent = getattr(bpy.types, panel.bl_parent_id, None)
+
+        if parent and not check(parent):
+            return False
+
+    if getattr(panel, 'bl_space_type', None) != 'VIEW_3D':
+        return False
+
+    if getattr(panel, 'bl_region_type', None) != 'UI':
+        return False
+
+    if is_excluded(panel):
+        return False
+
+    if not is_registered(panel):
+        return False
+
+    if not inspect.getmodule(panel).__name__.startswith('bl_ui'):
+        return True
+
+    if not poll(panel):
+        return False
+
+    return True
+
+
+def panels() -> list:
+    panels = []
+
+    def find_subclasses(a):
+        for b in a.__subclasses__():
+            if check(b):
+                panels.append(b)
+
+            for c in b.__subclasses__():
+                find_subclasses(c)
+
+    find_subclasses(bpy.types.Panel)
+
+    return panels
+
+
 def tabs() -> set:
     tabs = set()
 
@@ -71,6 +105,17 @@ def tabs() -> set:
 def update(panel: bpy.types.Panel):
     try:
         bpy.utils.unregister_class(panel)
+    except:
+        print('-' * 50)
+        print(f'Failed to unregister {panel}')
+        traceback.print_exc()
+        print('-' * 50)
+        return
+
+    try:
         bpy.utils.register_class(panel)
     except:
-        print(f'Failed to update {panel}')
+        print('-' * 50)
+        print(f'Failed to register {panel}')
+        traceback.print_exc()
+        print('-' * 50)
