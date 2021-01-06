@@ -5,6 +5,8 @@ def update_rename(self, context):
     if not self.rename:
         self['rename'] = self.name
 
+    self['rename'] = self.rename.strip()
+
 
 class TabProps(bpy.types.PropertyGroup):
     name: bpy.props.StringProperty(
