@@ -29,6 +29,13 @@ class AddonPrefs(bpy.types.AddonPreferences):
     )
 
 
+    exclude_tabs: bpy.props.StringProperty(
+        name='Exclude Tabs',
+        description='A comma separated list of tabs that SIMPLE TABS should ignore',
+        default='Item, ',
+    )
+
+
     tab_items: bpy.props.CollectionProperty(type=props.tab.TabProps)
     tab_index: bpy.props.IntProperty(name='', description='Ignore the sentence above')
 
@@ -44,3 +51,7 @@ class AddonPrefs(bpy.types.AddonPreferences):
         split = column.split(factor=0.5)
         split.label(text='Startup Delay')
         split.prop(self, 'startup_delay', text='')
+
+        split = column.split(factor=0.5)
+        split.label(text='Exclude Tabs')
+        split.prop(self, 'exclude_tabs', text='')
