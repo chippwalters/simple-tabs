@@ -68,7 +68,7 @@ def check(panel: bpy.types.Panel) -> bool:
     if not is_registered(panel):
         return False
 
-    if not inspect.getmodule(panel).__name__.startswith('bl_ui'):
+    if inspect.getmodule(panel).__name__.startswith('bl_ui'):
         return True
 
     if not poll(panel):
