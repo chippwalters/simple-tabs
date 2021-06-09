@@ -66,8 +66,8 @@ def check(panel: bpy.types.Panel) -> bool:
     if getattr(panel, 'bl_parent_id', None):
         parent = getattr(bpy.types, panel.bl_parent_id, None)
 
-        if parent and not check(parent):
-            return False
+        if parent:
+            return check(parent)
 
     if getattr(panel, 'bl_space_type', None) != 'VIEW_3D':
         return False
