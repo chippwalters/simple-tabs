@@ -27,7 +27,10 @@ def is_excluded(panel: bpy.types.Panel) -> bool:
 
 
 def module(panel: bpy.types.Panel) -> str:
-    return inspect.getmodule(panel).__name__.split('.')[0]
+    try:
+        return inspect.getmodule(panel).__name__.split('.')[0]
+    except:
+        utils.addon.popup('ERROR', f'{panel} has no module')
 
 
 def is_special(panel: bpy.types.Panel) -> bool:
