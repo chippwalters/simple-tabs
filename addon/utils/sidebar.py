@@ -99,8 +99,7 @@ def panels() -> list:
             if check(b):
                 panels.append(b)
 
-            for c in b.__subclasses__():
-                find_subclasses(c)
+            find_subclasses(b)
 
     find_subclasses(bpy.types.Panel)
 
