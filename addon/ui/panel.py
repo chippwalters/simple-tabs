@@ -28,7 +28,7 @@ class MainPanel(bpy.types.Panel):
         col.scale_x = 1.25
         col.scale_y = 1.5
 
-        col.operator('wm.save_userpref', text='', icon='PREFERENCES')
+        col.operator('preferences.addon_show', text='', icon='PREFERENCES').module = utils.addon.module()
         col.separator()
         col.operator('simpletabs.refresh', text='', icon='FILE_REFRESH')
         col.operator('simpletabs.update', text='', icon='CHECKMARK')
