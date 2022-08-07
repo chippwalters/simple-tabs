@@ -43,12 +43,14 @@ def is_special(panel: bpy.types.Panel) -> bool:
 
 
 def is_registered(panel: bpy.types.Panel) -> bool:
-    if getattr(panel, 'bl_idname', None):
-        name = panel.bl_idname
-    else:
-        name = panel.__name__
+    return hasattr(bpy.types, idname(panel))
 
-    return hasattr(bpy.types, name)
+
+def idname(panel: bpy.types.Panel) -> str:
+    if getattr(panel, 'bl_idname', None):
+        return panel.bl_idname
+    else:
+        return panel.__name__
 
 
 def poll(panel: bpy.types.Panel) -> bool:
