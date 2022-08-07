@@ -25,9 +25,6 @@ class MainPanel(bpy.types.Panel):
         row.template_list("SIMPLETABS_UL_TabList", '', prefs, 'tab_items', prefs, 'tab_index', rows=rows)
 
         col = row.column(align=True)
-        col.scale_x = 1.25
-        col.scale_y = 1.5
-
         col.operator('preferences.addon_show', text='', icon='PREFERENCES').module = utils.addon.module()
         col.separator()
         col.operator('simpletabs.refresh', text='', icon='FILE_REFRESH')
