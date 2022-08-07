@@ -23,6 +23,9 @@ class Move(bpy.types.Operator):
         items = prefs.tab_items
         index = prefs.tab_index
 
+        if index not in range(len(items)):
+            return {'CANCELLED'}
+
         direction = 1 if self.direction == 'DOWN' else -1
         neighbor = max(0, index + direction)
         items.move(neighbor, index)
