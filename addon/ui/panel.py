@@ -36,9 +36,10 @@ class MainPanel(bpy.types.Panel):
         col.separator()
         col.operator('simpletabs.add', text='', icon='ADD')
         col.operator('simpletabs.remove', text='', icon='REMOVE')
-        col.operator('simpletabs.move', text='', icon='TRIA_UP').direction = 'UP'
-        col.operator('simpletabs.move', text='', icon='TRIA_DOWN').direction = 'DOWN'
-        col.separator()
+        if len(prefs.tab_items) >= 2:
+            col.operator('simpletabs.move', text='', icon='TRIA_UP').direction = 'UP'
+            col.operator('simpletabs.move', text='', icon='TRIA_DOWN').direction = 'DOWN'
+            col.separator()
         col.operator('wm.url_open', text='', icon_value=icons.id('question')).url = 'http://cw1.me/simpletabd'
 
 
