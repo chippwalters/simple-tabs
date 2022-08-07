@@ -10,6 +10,13 @@ def prefs() -> bpy.types.AddonPreferences:
     return addons[module()].preferences
 
 
+def save_userpref():
+    preferences = bpy.context.preferences
+
+    if preferences.use_preferences_save:
+        bpy.ops.wm.save_userpref()
+
+
 def popup(type: str, message: str):
     def report(self: bpy.types.Menu, context: bpy.types.Context):
         self.layout.emboss = 'NONE'

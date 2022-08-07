@@ -30,4 +30,5 @@ class Move(bpy.types.Operator):
         index = max(0, min(neighbor, length))
 
         prefs.tab_index = index
+        utils.addon.save_userpref()
         return {'FINISHED'}

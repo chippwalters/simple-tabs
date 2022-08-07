@@ -37,5 +37,6 @@ class Refresh(bpy.types.Operator):
                 else:
                     tab.rename = name
 
+        utils.addon.save_userpref()        
         self.report({'INFO'}, f'Found {len(prefs.tab_items)} tabs')
         return {'FINISHED'}
