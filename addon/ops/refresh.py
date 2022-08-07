@@ -23,11 +23,6 @@ class Refresh(bpy.types.Operator):
         if utils.bc.get_module():
             names.add(utils.bc.get_default())
 
-        for tab in prefs.tab_items[:]:
-            if tab.name not in names:
-                index = prefs.tab_items.find(tab.name)
-                prefs.tab_items.remove(index)
-
         for name in names:
             if name not in prefs.tab_items:
                 tab = prefs.tab_items.add()
