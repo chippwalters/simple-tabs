@@ -33,6 +33,9 @@ class MainPanel(bpy.types.Panel):
         col.operator('simpletabs.refresh', text='', icon='FILE_REFRESH')
         col.operator('simpletabs.update', text='', icon='CHECKMARK')
         col.separator()
+        col.separator()
+        col.operator('simpletabs.add', text='', icon='ADD')
+        col.operator('simpletabs.remove', text='', icon='REMOVE')
         col.operator('simpletabs.move', text='', icon='TRIA_UP').direction = 'UP'
         col.operator('simpletabs.move', text='', icon='TRIA_DOWN').direction = 'DOWN'
         col.separator()

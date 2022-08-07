@@ -1,12 +1,16 @@
 import bpy
 from . import refresh
 from . import update
+from . import add
+from . import remove
 from . import move
 
 
 classes = (
     refresh.Refresh,
     update.Update,
+    add.Add,
+    remove.Remove,
     move.Move,
 )
 
