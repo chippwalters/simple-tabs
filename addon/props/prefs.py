@@ -42,6 +42,13 @@ class AddonPrefs(bpy.types.AddonPreferences):
     )
 
 
+    show_sidebar: bpy.props.BoolProperty(
+        name='Show Sidebar',
+        description='Open the sidebar when the refresh or update buttons are pressed',
+        default=False,
+    )
+
+
     tab_items: bpy.props.CollectionProperty(type=props.tab.TabProps)
     tab_index: bpy.props.IntProperty(name='', description='Ignore the sentence above')
 
@@ -61,3 +68,7 @@ class AddonPrefs(bpy.types.AddonPreferences):
         split = column.split(factor=0.5)
         split.label(text='Exclude Tabs')
         split.prop(self, 'exclude_tabs', text='')
+
+        split = column.split(factor=0.5)
+        split.label(text='Show Sidebar')
+        split.prop(self, 'show_sidebar', text='')

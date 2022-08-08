@@ -140,6 +140,9 @@ def update(panel: bpy.types.Panel):
 
 
 def show():
-    if hasattr(bpy.context.space_data, 'show_region_ui'):
-        if not bpy.context.space_data.show_region_ui:
-            bpy.context.space_data.show_region_ui = True
+    prefs = utils.addon.prefs()
+
+    if prefs.show_sidebar:
+        if hasattr(bpy.context.space_data, 'show_region_ui'):
+            if not bpy.context.space_data.show_region_ui:
+                bpy.context.space_data.show_region_ui = True
