@@ -137,3 +137,9 @@ def update(panel: bpy.types.Panel):
         print(f'Failed to register {panel}')
         traceback.print_exc()
         print('-' * 50)
+
+
+def show():
+    if hasattr(bpy.context.space_data, 'show_region_ui'):
+        if not bpy.context.space_data.show_region_ui:
+            bpy.context.space_data.show_region_ui = True
