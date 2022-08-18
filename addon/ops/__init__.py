@@ -4,6 +4,8 @@ from . import update
 from . import add
 from . import remove
 from . import move
+from . import export_settings
+from . import import_settings
 
 
 classes = (
@@ -12,6 +14,8 @@ classes = (
     add.Add,
     remove.Remove,
     move.Move,
+    export_settings.ExportSettings,
+    import_settings.ImportSettings,
 )
 
 
