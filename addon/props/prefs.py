@@ -72,3 +72,9 @@ class AddonPrefs(bpy.types.AddonPreferences):
         split = column.split(factor=0.5)
         split.label(text='Show Sidebar')
         split.prop(self, 'show_sidebar', text='')
+
+        column.separator()
+
+        split = column.split(factor=0.5)
+        split.operator('simpletabs.export_settings')
+        split.operator('simpletabs.import_settings')
