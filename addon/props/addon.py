@@ -11,3 +11,8 @@ class AddonProps(bpy.types.PropertyGroup):
     @property
     def prefs(self) -> bpy.types.AddonPreferences:
         return utils.addon.prefs()
+
+
+    @property
+    def version(self) -> tuple:
+        return utils.addon.version()

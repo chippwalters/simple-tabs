@@ -10,6 +10,11 @@ def prefs() -> bpy.types.AddonPreferences:
     return addons[module()].preferences
 
 
+def version() -> tuple:
+    from ... import bl_info
+    return bl_info['version']
+
+
 def save_userpref():
     preferences = bpy.context.preferences
 
