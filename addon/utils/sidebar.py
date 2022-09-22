@@ -90,9 +90,6 @@ def check(panel: bpy.types.Panel) -> bool:
         if not poll(panel):
             return False
 
-    if idname(panel) == 'VIEW3D_PT_context_properties':
-        return False
-
     return True
 
 

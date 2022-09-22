@@ -15,6 +15,8 @@ def register():
     for cls in classes:
         bpy.utils.register_class(cls)
 
+    prefs.update_exclude_tabs()
+
     bpy.types.WindowManager.simpletabs = bpy.props.PointerProperty(type=addon.AddonProps)
 
 

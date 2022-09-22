@@ -3,9 +3,18 @@ from .. import props
 from .. import utils
 
 
-def update_exclude_tabs(self, context):
-    exclude = [tab.strip() for tab in self.exclude_tabs.split(',')]
-    self['exclude_tabs'] = ', '.join(tab for tab in exclude if tab)
+def update_exclude_tabs(self=None, context=None):
+    if not self:
+        self = bpy.context.preferences.addons[utils.addon.module()].preferences
+
+    exclude: str = self.exclude_tabs
+    default: str = self.bl_rna.properties['exclude_tabs'].default
+
+    exclude = [tab.strip() for tab in exclude.split(',')]
+    default = [tab.strip() for tab in default.split(',')]
+
+    combined = sorted(set(exclude + default))
+    self['exclude_tabs'] = ', '.join(tab for tab in combined if tab)
 
 
 class AddonPrefs(bpy.types.AddonPreferences):
@@ -37,7 +46,7 @@ class AddonPrefs(bpy.types.AddonPreferences):
     exclude_tabs: bpy.props.StringProperty(
         name='Exclude Tabs',
         description='A comma separated list of tabs that SIMPLE TABS should ignore',
-        default='',
+        default='Item, Tool',
         update=update_exclude_tabs,
     )
 
