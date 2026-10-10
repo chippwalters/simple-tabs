@@ -43,7 +43,7 @@ def is_special(panel: bpy.types.Panel) -> bool:
 
 
 def is_registered(panel: bpy.types.Panel) -> bool:
-    return hasattr(bpy.types, idname(panel))
+    return getattr(bpy.types, idname(panel), None) is panel
 
 
 def idname(panel: bpy.types.Panel) -> str:
@@ -65,6 +65,9 @@ def poll(panel: bpy.types.Panel) -> bool:
 
 
 def check(panel: bpy.types.Panel) -> bool:
+    if not is_registered(panel):
+        return False
+
     if getattr(panel, 'bl_parent_id', None):
         parent = getattr(bpy.types, panel.bl_parent_id, None)
 
@@ -81,9 +84,6 @@ def check(panel: bpy.types.Panel) -> bool:
         return False
 
     if is_special(panel):
-        return False
-
-    if not is_registered(panel):
         return False
 
     if module(panel) != 'bl_ui':
